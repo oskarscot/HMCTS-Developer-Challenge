@@ -28,7 +28,7 @@ A Spring Boot application that provides a RESTful API for managing caseworker ta
 1. Create a PostgreSQL database:
 
 ```sql
-CREATE DATABASE tasks_db;
+CREATE DATABASE hmcts_task;
 ```
 
 2. Update database configuration in `src/main/resources/application.properties`
