@@ -12,7 +12,7 @@ A Spring Boot application that provides a RESTful API for managing caseworker ta
 - **ORM:** Spring Data JPA
 - **Migration:** Flyway
 - **Documentation:** SpringDoc OpenAPI
-- **Testing:** JUnit 5, Mockito
+- **Testing:** JUnit 5, Mockito, Testcontainers
 - **Build Tool:** Gradle
 
 ## Getting Started
@@ -22,6 +22,7 @@ A Spring Boot application that provides a RESTful API for managing caseworker ta
 - Java 17 or higher
 - Maven 3.6 or higher
 - PostgreSQL 12 or higher
+- Docker (for running integration tests with Testcontainers)
 
 ### Database Setup
 
@@ -42,12 +43,22 @@ The application will start on `http://localhost:8080`
 ### Running Tests
 
 ```bash
-gradle run test
+gradle test
 ```
+
+Integration tests use Testcontainers to automatically provision a PostgreSQL container, so no manual database setup is required for testing.
 
 ### Code Coverage Report
 
 Coverage reports will be generated in `target/site/jacoco`.
+
+## Test Infrastructure
+
+The project uses Testcontainers for integration testing with a real PostgreSQL database:
+
+- `TestContainersSingleton`: A singleton class that provides a shared PostgreSQL container instance
+- `AbstractIntegrationTest`: Base class for service-level integration tests
+- `AbstractControllerTest`: Base class for controller-level integration tests with MockMvc
 
 ## API Documentation
 
