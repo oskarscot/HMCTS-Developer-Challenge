@@ -52,7 +52,7 @@ Start the development server:
 npm run dev
 
 # Using Bun
-bun dev
+bun run dev
 ```
 
 The application will be available at http://localhost:5173.
