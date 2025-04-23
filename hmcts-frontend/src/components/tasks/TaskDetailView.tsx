@@ -9,6 +9,7 @@ import { formatDateTime } from "@/lib/utils";
 import { ArrowLeft, Calendar, CheckCircle, Clock, Edit, Trash } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { ConfirmDeleteDialog } from "@/components/dialog/ConfirmDeleteDialog";
 
 export function TaskDetailView() {
   const { id } = useParams<{ id: string }>();
@@ -16,6 +17,7 @@ export function TaskDetailView() {
   const [task, setTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -57,21 +59,23 @@ export function TaskDetailView() {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDeleteClick = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const handleConfirmDelete = async () => {
     if (!task || !id) return;
     
-    if (confirm("Are you sure you want to delete this task?")) {
-      try {
-        await taskApi.deleteTask(parseInt(id));
-        toast.info("Task deleted", {
-          description: "The task has been successfully deleted.",
-        });
-        navigate("/");
-      } catch (error) {
-        toast.error("Error deleting task", {
-          description: "There was a problem deleting the task. Please try again.",
-        });
-      }
+    try {
+      await taskApi.deleteTask(parseInt(id));
+      toast.info("Task deleted", {
+        description: "The task has been successfully deleted.",
+      });
+      navigate("/");
+    } catch (error) {
+      toast.error("Error deleting task", {
+        description: "There was a problem deleting the task. Please try again.",
+      });
     }
   };
 
@@ -183,12 +187,20 @@ export function TaskDetailView() {
             </Link>
           </Button>
           
-          <Button variant="destructive" onClick={handleDelete}>
+          <Button variant="destructive" onClick={handleDeleteClick}>
             <Trash className="mr-2 h-4 w-4" />
             Delete Task
           </Button>
         </CardFooter>
       </Card>
+
+      <ConfirmDeleteDialog
+        open={showDeleteDialog}
+        onOpenChange={setShowDeleteDialog}
+        onConfirm={handleConfirmDelete}
+        title="Delete Task"
+        description="Are you sure you want to delete this task? This action cannot be undone."
+      />
     </div>
   );
 }

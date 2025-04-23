@@ -1,10 +1,12 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { useState } from "react";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Task } from "@/types/task";
 import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
 import { formatTimeDistance, formatDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon, Edit, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ConfirmDeleteDialog } from "@/components/dialog/ConfirmDeleteDialog";
 
 interface TaskCardProps {
   task: Task;
@@ -12,6 +14,17 @@ interface TaskCardProps {
 }
 
 export function TaskCard({ task, onDelete }: TaskCardProps) {
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  const handleDeleteClick = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete(task.id);
+    setShowDeleteDialog(false);
+  };
+
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
@@ -47,12 +60,20 @@ export function TaskCard({ task, onDelete }: TaskCardProps) {
           <Button 
             variant="outline" 
             size="icon" 
-            onClick={() => onDelete(task.id)}
+            onClick={handleDeleteClick}
           >
             <Trash className="h-4 w-4" />
           </Button>
         </div>
       </CardFooter>
+
+      <ConfirmDeleteDialog
+        open={showDeleteDialog}
+        onOpenChange={setShowDeleteDialog}
+        onConfirm={handleConfirmDelete}
+        title="Delete Task"
+        description="Are you sure you want to delete this task? This action cannot be undone."
+      />
     </Card>
   );
 }

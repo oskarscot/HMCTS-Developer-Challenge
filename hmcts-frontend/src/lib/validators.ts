@@ -1,11 +1,5 @@
 import { z } from 'zod';
-import { TaskStatus } from '../types/task';
-
-const isFutureDate = (date: Date) => {
-  const now = new Date();
-  now.setHours(0, 0, 0, 0); // Reset hours to compare just the date
-  return date >= now;
-};
+import { TaskStatus } from '@/types/task';
 
 export const taskCreateSchema = z.object({
   title: z
@@ -24,8 +18,14 @@ export const taskCreateSchema = z.object({
     .refine((date) => !isNaN(new Date(date).getTime()), {
       message: 'Please enter a valid date',
     })
-    .refine((date) => isFutureDate(new Date(date)), {
-      message: 'Due date must be in the future',
+    .refine((date) => {
+      const dateObj = new Date(date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      return dateObj >= today;
+    }, {
+      message: 'Due date must be in the present or future',
     }),
 });
 

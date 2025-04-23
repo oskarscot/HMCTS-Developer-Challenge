@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { Task, TaskStatus } from "@/types/task";
-import { TaskCreateInput, TaskUpdateInput, taskCreateSchema, taskUpdateSchema } from "../../lib/validators";
+import { TaskCreateInput, TaskUpdateInput, taskCreateSchema, taskUpdateSchema } from "@/lib/validators";
 import taskApi from "@/api/taskApi";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,21 +13,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { format } from "date-fns";
-import { cn } from "../../lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Calendar } from "../ui/calendar";
+import { cn } from "@/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
 
 interface TaskFormProps {
@@ -44,7 +44,7 @@ export function TaskForm({ initialData, isEditing = false }: TaskFormProps) {
       title: initialData.title,
       description: initialData.description || "",
       status: initialData.status,
-      dueDate: initialData.dueDate.split("T")[0], // Get just the date part
+      dueDate: initialData.dueDate,
     } : {
       title: "",
       description: "",
@@ -70,6 +70,7 @@ export function TaskForm({ initialData, isEditing = false }: TaskFormProps) {
       }
       navigate("/");
     } catch (error) {
+      console.error("Form submission error:", error);
       toast.error(`Error ${isEditing ? "updating" : "creating"} task`, {
         description: `There was a problem ${isEditing ? "updating" : "creating"} the task. Please try again.`,
       });
@@ -178,7 +179,14 @@ export function TaskForm({ initialData, isEditing = false }: TaskFormProps) {
                   <Calendar
                     mode="single"
                     selected={field.value ? new Date(field.value) : undefined}
-                    onSelect={(date) => field.onChange(date ? format(date, "yyyy-MM-dd") : "")}
+                    onSelect={(date) => {
+                      if (date) {
+                        const formattedDate = format(date, "yyyy-MM-dd'T'HH:mm:ss");
+                        field.onChange(formattedDate);
+                      } else {
+                        field.onChange("");
+                      }
+                    }}
                     disabled={(date) => date < new Date()}
                     initialFocus
                   />

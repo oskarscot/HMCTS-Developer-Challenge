@@ -33,18 +33,16 @@ export function TaskList() {
   }, []);
 
   const handleDeleteTask = async (id: number) => {
-    if (confirm("Are you sure you want to delete this task?")) {
-      try {
-        await taskApi.deleteTask(id);
-        setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-        toast.info("Task deleted", {
-          description: "The task has been successfully deleted.",
-        });
-      } catch (error) {
-        toast.error("Error deleting task", {
-          description: "There was a problem deleting the task. Please try again.",
-        });
-      }
+    try {
+      await taskApi.deleteTask(id);
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+      toast.info("Task deleted", {
+        description: "The task has been successfully deleted.",
+      });
+    } catch (error) {
+      toast.error("Error deleting task", {
+        description: "There was a problem deleting the task. Please try again.",
+      });
     }
   };
 

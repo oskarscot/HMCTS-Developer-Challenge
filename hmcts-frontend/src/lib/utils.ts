@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { formatDistanceToNow, format, parseISO, isBefore } from 'date-fns';
-import { TaskStatus } from '../types/task';
+import { TaskStatus } from '@/types/task';
 
 /**
  * Merges tailwind classes
