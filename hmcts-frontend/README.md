@@ -1,54 +1,112 @@
-# React + TypeScript + Vite
+# HMCTS Task Manager Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The frontend component of the HMCTS Task Manager application, built with React, TypeScript, and shadcn/ui components.
 
-Currently, two official plugins are available:
+## Technology Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19**: For building the user interface
+- **TypeScript**: For type safety and improved developer experience
+- **Vite**: For fast builds and development experience
+- **TailwindCSS 4**: For styling
+- **shadcn/ui**: For UI components
+- **React Router**: For client-side routing
+- **React Hook Form**: For form management and validation
+- **Zod**: For schema validation
+- **Axios**: For API requests
+- **date-fns**: For date formatting
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Task management interface
+- Task filtering by status
+- Light and dark mode support
+- Form validation
+- Toast notifications
+- Confirmation dialogs
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Alternatively: Bun runtime (preferred)
+
+### Installation
+
+1. Install dependencies:
+
+```bash
+# Using npm
+npm install
+
+# Using Bun (recommended)
+bun install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Start the development server:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+# Using npm (adjust command)
+npm run dev
+
+# Using Bun
+bun dev
 ```
+
+The application will be available at http://localhost:5173.
+
+### Building for Production
+
+Build the application:
+
+```bash
+# Using npm
+npm run build
+
+# Using Bun
+bun run build
+```
+
+Preview the production build:
+
+```bash
+# Using npm
+npm run preview
+
+# Using Bun
+bun run preview
+```
+
+## Project Structure
+
+```
+hmcts-frontend/
+├── public/             # Static assets
+├── src/
+│   ├── api/            # API client code
+│   ├── components/     # React components
+│   │   ├── layout/     # Layout components
+│   │   ├── tasks/      # Task-related components
+│   │   └── ui/         # shadcn/ui components
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility functions and helpers
+│   ├── pages/          # Page components
+│   ├── types/          # TypeScript type definitions
+│   ├── App.tsx         # Main application component
+│   ├── index.css       # Global styles
+│   └── main.tsx        # Application entry point
+├── .eslintrc.js        # ESLint configuration
+├── tailwind.config.js  # TailwindCSS configuration
+├── tsconfig.json       # TypeScript configuration
+└── vite.config.ts      # Vite configuration
+```
+
+## Theming
+
+The application supports light and dark themes, which can be customized in `src/index.css`. Theme switching is handled via the `ThemeProvider` component.
+
+## API Integration
+
+The frontend communicates with the backend API defined in `src/api/taskApi.ts`. Make sure the backend server is running before using the frontend.
