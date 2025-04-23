@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Task, TaskStatus } from "../../types/task";
-import { TaskCard } from "./TaskCard";
-import { Button } from "../ui/button";
+import { Task, TaskStatus } from "@/types/task";
+import { TaskCard } from "@/components/tasks/TaskCard";
+import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Label } from "../ui/label";
+import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import taskApi from "@/api/taskApi";
 

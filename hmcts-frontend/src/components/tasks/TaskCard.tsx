@@ -1,8 +1,8 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import { Task } from "../../types/task";
-import { TaskStatusBadge } from "./TaskStatusBadge";
-import { formatTimeDistance, formatDate } from "../../lib/utils";
-import { Button } from "../ui/button";
+import { Task } from "@/types/task";
+import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
+import { formatTimeDistance, formatDate } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { CalendarIcon, Edit, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 

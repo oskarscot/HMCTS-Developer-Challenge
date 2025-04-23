@@ -1,6 +1,6 @@
-import { Badge } from "../ui/badge";
-import { TaskStatus } from "../../types/task";
-import { getStatusColor, getStatusText, isTaskOverdue } from "../../lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { TaskStatus } from "@/types/task";
+import { getStatusColor, getStatusText, isTaskOverdue } from "@/lib/utils";
 
 interface TaskStatusBadgeProps {
   status: TaskStatus;

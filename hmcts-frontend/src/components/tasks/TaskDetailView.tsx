@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { Task, TaskStatus } from "../../types/task";
-import taskApi from "../../api/taskApi";
-import { Button } from "../ui/button";
+import { Task, TaskStatus } from "@/types/task";
+import taskApi from "@/api/taskApi";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import { TaskStatusBadge } from "./TaskStatusBadge";
-import { formatDateTime } from "../../lib/utils";
+import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
+import { formatDateTime } from "@/lib/utils";
 import { ArrowLeft, Calendar, CheckCircle, Clock, Edit, Trash } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 
 export function TaskDetailView() {

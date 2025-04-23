@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { ModeToggle } from "../ui/mode-toggle";
-import { Button } from "../ui/button";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 
 export function Header() {
