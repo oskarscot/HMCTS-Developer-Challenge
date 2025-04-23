@@ -62,8 +62,8 @@ See [Frontend README](hmcts-frontend/README.md) for detailed instructions.
 
 ```bash
 cd hmcts-frontend
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 4. **Access the application**
@@ -74,10 +74,6 @@ The backend API will be available at http://localhost:8080
 ## API Documentation
 
 API documentation is available via Swagger UI at http://localhost:8080/swagger-ui.html when the backend is running.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
 
